@@ -1,0 +1,183 @@
+{% assign hero_settings = section.settings %}
+
+<section
+  class="relative overflow-hidden w-full"
+  style="
+    padding-top: {{ hero_settings.padding_top }}px;
+    padding-bottom: {{ hero_settings.padding_bottom }}px;
+    min-height: calc({{ hero_settings.padding_top }}px + {{ hero_settings.padding_bottom }}px + 20vh);
+  "
+>
+  {% comment %} **Fondo (cover + degradado opcional)** {% endcomment %}
+  <div class="absolute inset-0 z-1">
+    {% if hero_settings.background_image != blank %}
+      {{
+        hero_settings.background_image
+        | image_url: width: 3000
+        | image_tag: class: 'w-full h-full object-cover', loading: 'eager', alt: hero_settings.background_image.alt
+      }}
+    {% else %}
+      <div class="w-full h-full bg-gradient-to-br from-[#1a2234] to-[#2a1a34]"></div>
+    {% endif %}
+
+    {% if hero_settings.enable_blur_effect %}
+      <div class="absolute inset-0 backdrop-blur-sm bg-black/10"></div>
+    {% endif %}
+  </div>
+
+  <div class="relative z-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
+    {% if hero_settings.show_header %}
+      <h1 class="mb-8 text-white text-lg font-light tracking-wider">
+        {{ hero_settings.tagline | default: 'Super. Simple. Banking.' }}
+      </h1>
+    {% endif %}
+
+    <div class="w-full max-w-3xl mx-auto">
+      <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        {{ hero_settings.title | default: 'Simple banking that works like magic.' }}
+      </h1>
+
+      <p class="text-white text-xl sm:text-2xl font-light mb-10 opacity-90 max-w-2xl mx-auto">
+        {{ hero_settings.subtitle | default: 'Simple, transparent banking. No hidden fees and free overdrafts.' }}
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="{{ hero_settings.primary_cta_url | default: '#' }}"
+          class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 text-lg"
+        >
+          {{ hero_settings.primary_cta_text | default: 'Sign up' }}
+        </a>
+
+        <a
+          href="{{ hero_settings.secondary_cta_url | default: '#' }}"
+          class="px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 font-medium rounded-lg transition-colors duration-300 text-lg"
+        >
+          {{ hero_settings.secondary_cta_text | default: 'Demo' }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🔧 Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 120,
+      "info": "Afecta el tamaño total de la sección"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "🎨 Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Se ajustará en modo 'cover' (cubre toda la sección)"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "center", "label": "Centered" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_blur_effect",
+      "label": "Enable Blur Effect",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "✏️ Content Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show Header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Super. Simple. Banking."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Simple banking that works like magic."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Simple, transparent banking. No hidden fees and free overdrafts."
+    },
+    {
+      "type": "header",
+      "content": "🛎️ CTA Settings"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA Text",
+      "default": "Sign up"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_url",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA Text",
+      "default": "Demo"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_url",
+      "label": "Secondary CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero (Cover Background)",
+      "category": "Sections"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,306 @@
+<div
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="bg-white py-16 px-4 sm:px-6 lg:px-8 page-width">
+    <div class="mx-auto">
+      <!-- Mobile Image (Top) - Solo visible en mobile cuando está configurada arriba -->
+      {% if section.settings.image_position_mobile == 'top' %}
+        <div class="lg:hidden w-full mb-8">
+          {% if section.settings.cards_image %}
+            <div class="relative">
+              <img
+                src="{{ section.settings.cards_image | img_url: '800x' }}"
+                alt="Business cards stack"
+                class="w-full h-auto rounded-xl shadow-lg object-contain"
+              >
+            </div>
+          {% else %}
+            <div class="bg-gray-100 rounded-xl w-full aspect-[4/3] flex items-center justify-center">
+              <span class="text-gray-400">Cards image placeholder</span>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="flex flex-col {% if section.settings.image_position_desktop == 'right' %}lg:flex-row{% else %}lg:flex-row-reverse{% endif %} items-center gap-8 lg:gap-12">
+        <!-- Content Column -->
+        <div class="lg:w-3/5 w-full">
+          <span class="text-purple-600 font-medium text-lg">{{ section.settings.section_label }}</span>
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">{{ section.settings.main_title }}</h1>
+          <p class="text-lg text-gray-600 mb-12">{{ section.settings.description }}</p>
+
+          <!-- Features List (Single Column) -->
+          <div class="space-y-8">
+            {% for block in section.blocks %}
+              <div class="feature-block" {{ block.shopify_attributes }}>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                  <!-- Icon -->
+                  <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center mb-4">
+                    {% case block.settings.icon %}
+                      {% when 'card' %}
+                        <svg
+                          class="w-6 h-6 text-purple-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                      {% when 'currency' %}
+                        <svg
+                          class="w-6 h-6 text-purple-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      {% when 'analytics' %}
+                        <svg
+                          class="w-6 h-6 text-purple-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    {% endcase %}
+                  </div>
+
+                  <!-- Content -->
+                  <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ block.settings.title }}</h3>
+                  <p class="text-gray-600 mb-4">{{ block.settings.description }}</p>
+
+                  {% if block.settings.link_url %}
+                    <a
+                      href="{{ block.settings.link_url }}"
+                      class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
+                    >
+                      {{ block.settings.link_text }}
+                      <svg
+                        class="w-4 h-4 ml-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Desktop Image Column - Solo visible en desktop -->
+        <div class="lg:w-2/5 w-full {% if section.settings.image_position_mobile == 'top' or section.settings.image_position_mobile == 'bottom' %}hidden lg:block{% endif %}">
+          {% if section.settings.cards_image %}
+            <div class="relative w-full flex items-center justify-center h-full">
+              <img
+                src="{{ section.settings.cards_image | img_url: '800x' }}"
+                alt="Business cards stack"
+                class="w-full max-h-[80%] rounded-xl shadow-lg transform {% if section.settings.image_position_desktop == 'right' %}rotate-3{% else %}-rotate-3{% endif %} transition-all duration-300 hover:rotate-0 object-contain"
+              >
+            </div>
+          {% else %}
+            <div class="bg-gray-100 rounded-xl w-full aspect-[4/3] flex items-center justify-center">
+              <span class="text-gray-400">Cards image placeholder</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Mobile Image (Bottom) - Solo visible en mobile cuando está configurada abajo -->
+      {% if section.settings.image_position_mobile == 'bottom' %}
+        <div class="lg:hidden w-full mt-8">
+          {% if section.settings.cards_image %}
+            <div class="relative">
+              <img
+                src="{{ section.settings.cards_image | img_url: '800x' }}"
+                alt="Business cards stack"
+                class="w-full h-auto rounded-xl shadow-lg object-contain"
+              >
+            </div>
+          {% else %}
+            <div class="bg-gray-100 rounded-xl w-full aspect-[4/3] flex items-center justify-center">
+              <span class="text-gray-400">Cards image placeholder</span>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Business Cards Section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label",
+      "default": "Features"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "The only card you'll ever need. Simple."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Give your team the financial tools they need to succeed. Simple expense management for modern businesses."
+    },
+    {
+      "type": "image_picker",
+      "id": "cards_image",
+      "label": "Cards Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position_desktop",
+      "label": "Desktop Image Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "image_position_mobile",
+      "label": "Mobile Image Position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Above content"
+        },
+        {
+          "value": "bottom",
+          "label": "Below content"
+        }
+      ],
+      "default": "top"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Feature description goes here."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "currency",
+              "label": "Currency"
+            },
+            {
+              "value": "analytics",
+              "label": "Analytics"
+            }
+          ],
+          "default": "card"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Learn more"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Business Cards Section",
+      "category": "Custom Sections",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Unlimited cards",
+            "description": "Give your team the autonomy they need with access to as many cards as they need. Authorise purchases with a click. Simple.",
+            "icon": "card",
+            "link_text": "Learn more"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Easy expense policies",
+            "description": "Every card comes with configurable spending limits, purchase restrictions, and cancellations for each employee and team.",
+            "icon": "currency",
+            "link_text": "Learn more"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Advanced analytics",
+            "description": "An all-in-one platform that helps you balance everything your team need to be happy and your finances in order.",
+            "icon": "analytics",
+            "link_text": "Learn more"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

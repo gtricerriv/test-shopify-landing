@@ -1,0 +1,296 @@
+<header
+  class="fixed top-0 left-0 w-full h-[70px] bg-gray-800 z-[999] shadow-md font-sans"
+  style="font-family: 'Inter', sans-serif;"
+>
+  <div class="flex justify-between items-center h-full max-w-[1440px] mx-auto px-6">
+    <!-- Left Section: Logo + Menu -->
+    <div class="flex items-center gap-8">
+      <!-- Logo and Brand Name -->
+      <div class="flex items-center z-[51]">
+        <a href="{{ routes.root_url }}" class="flex items-center no-underline text-white">
+          {% if section.settings.logo != blank %}
+            <img
+              src="{{ section.settings.logo | image_url: width: 200 }}"
+              alt="{{ shop.name }}"
+              width="200"
+              height="200"
+              class="w-8 h-8 object-contain"
+            >
+          {% else %}
+            <div class="w-8 h-8 flex items-center justify-center">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <rect x="2" y="2" width="20" height="20" rx="4" class="fill-primary-700"/>
+                <path d="M12 16L8 10H16L12 16Z" class="fill-white"/>
+              </svg>
+            </div>
+          {% endif %}
+          <span class="font-semibold text-base uppercase ml-3 text-nowrap">{{ shop.name }}</span>
+        </a>
+      </div>
+
+      <!-- Main Navigation - Desktop -->
+      <nav class="hidden lg:block">
+        <ul class="flex list-none gap-6">
+          {% for link in linklists[section.settings.main_menu].links %}
+            <li class="relative flex">
+              <a
+                href="{{ link.url }}"
+                class="
+                  text-white no-underline text-base font-medium py-2 px-1 relative hover:opacity-80 transition-opacity duration-300 group
+                  {% if link.active %}font-bold{% endif %}
+                "
+              >
+                {{ link.title }}
+                <span
+                  class="
+                    absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-8px)] h-0.5 bg-primary-700
+                    {% if link.active %}scale-x-100{% else %}scale-x-0{% endif %}
+                    origin-center transition-transform duration-300 group-hover:scale-x-100
+                  "
+                ></span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Right Section: Actions (login, signup, cart) -->
+    <div class="flex items-center gap-4">
+      {% if section.settings.show_login and shop.customer_accounts_enabled %}
+        <a
+          href="{{ routes.account_login_url }}"
+          class="invisible lg:visible lg:inline-block text-white no-underline text-base font-medium py-2 px-3 hover:opacity-80 transition-opacity duration-300"
+        >
+          {% if customer %}
+            {{ section.settings.login_text | default: 'My Account' }}
+          {% else %}
+            {{ section.settings.login_text | default: 'Login' }}
+          {% endif %}
+        </a>
+      {% endif %}
+
+      {% if section.settings.show_signup and shop.customer_accounts_enabled %}
+        <a
+          href="{{ routes.account_register_url }}"
+          class="invisible lg:visible lg:inline-block bg-blue-600 text-white no-underline text-base font-medium py-2 px-4 rounded-md hover:opacity-80 transition-opacity duration-300 shadow-sm hover:shadow-md"
+        >
+          {{ section.settings.signup_text | default: 'Sign Up' }}
+        </a>
+      {% endif %}
+
+      {% if section.settings.show_cart %}
+        <a
+          href="{{ routes.cart_url }}"
+          class="invisible lg:visible lg:flex relative text-white no-underline text-base font-medium py-2 px-3 hover:opacity-80 transition-opacity duration-300"
+        >
+          {{ section.settings.cart_text | default: 'Cart' }}
+          {% if cart.item_count > 0 %}
+            <span class="absolute -top-1 -right-1 bg-primary-700 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">
+              {{ cart.item_count }}
+            </span>
+          {% endif %}
+        </a>
+      {% endif %}
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="lg:hidden bg-transparent border-none w-6 h-6 relative z-[51] cursor-pointer p-0"
+        id="mobile-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span
+          class="block w-full h-0.5 bg-white absolute left-0 transition-all duration-300 top-1 hamburger-line"
+        ></span>
+        <span
+          class="block w-full h-0.5 bg-white absolute left-0 transition-all duration-300 top-3 hamburger-line"
+        ></span>
+        <span
+          class="block w-full h-0.5 bg-white absolute left-0 transition-all duration-300 top-5 hamburger-line"
+        ></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu Dropdown -->
+<div
+  class="fixed inset-0 bg-gray-800 z-[999] translate-y-full opacity-0 pointer-events-none pt-[70px] transition-all duration-300"
+  id="mobile-menu"
+>
+  <nav class="h-full overflow-y-auto">
+    <ul class="flex flex-col list-none h-full">
+      {% for link in linklists[section.settings.main_menu].links %}
+        <li class="border-b border-gray-700">
+          <a
+            href="{{ link.url }}"
+            class="
+              block text-white no-underline text-base font-medium py-4 px-6 hover:opacity-80 transition-opacity duration-300
+              {% if link.active %}font-bold{% endif %}
+            "
+          >
+            {{ link.title }}
+          </a>
+        </li>
+      {% endfor %}
+
+      <li class="mt-auto p-6">
+        <div class="flex flex-col gap-4 px-4">
+          {% if section.settings.show_login and shop.customer_accounts_enabled %}
+            <a
+              href="{{ routes.account_login_url }}"
+              class="block text-center text-white no-underline text-base font-medium py-3 px-6 hover:opacity-80 transition-opacity duration-300 border border-white rounded-md"
+            >
+              {% if customer %}
+                {{ section.settings.login_text | default: 'My Account' }}
+              {% else %}
+                {{ section.settings.login_text | default: 'Login' }}
+              {% endif %}
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_signup and shop.customer_accounts_enabled %}
+            <a
+              href="{{ routes.account_register_url }}"
+              class="block text-center bg-blue-600 text-white no-underline text-base font-medium py-3 px-6 rounded-md hover:opacity-80 transition-opacity duration-300 shadow-sm"
+            >
+              {{ section.settings.signup_text | default: 'Sign Up' }}
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_cart %}
+            <a
+              href="{{ routes.cart_url }}"
+              class="block text-center text-white no-underline text-base font-medium py-3 px-6 hover:opacity-80 transition-opacity duration-300 border border-white rounded-md"
+            >
+              {{ section.settings.cart_text | default: 'Cart' }}
+              {% if cart.item_count > 0 %}
+                <span class="ml-2 bg-white text-gray-800 rounded-full w-6 h-6 inline-flex items-center justify-center">
+                  {{ cart.item_count }}
+                </span>
+              {% endif %}
+            </a>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Mobile Menu JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerLines = document.querySelectorAll('.hamburger-line');
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', function () {
+        const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+
+        // Toggle menu visibility
+        mobileToggle.setAttribute('aria-expanded', !isExpanded);
+
+        if (!isExpanded) {
+          // Open menu
+          mobileMenu.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+          mobileMenu.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+          // Hamburger to X animation
+          hamburgerLines[0].style.transform = 'translateY(4px) rotate(45deg)';
+          hamburgerLines[1].style.opacity = '0';
+          hamburgerLines[2].style.transform = 'translateY(-4px) rotate(-45deg)';
+        } else {
+          // Close menu
+          mobileMenu.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+          mobileMenu.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+          // X to hamburger animation
+          hamburgerLines[0].style.transform = '';
+          hamburgerLines[1].style.opacity = '';
+          hamburgerLines[2].style.transform = '';
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Store Logo",
+      "info": "Recommended size: 200x200px"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu",
+      "default": "main-menu",
+      "info": "Select main navigation menu"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_login",
+      "label": "Show Login Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "login_text",
+      "label": "Login Button Text",
+      "default": "Login"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_signup",
+      "label": "Show Sign Up Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "signup_text",
+      "label": "Sign Up Button Text",
+      "default": "Sign Up"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show Cart Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cart_text",
+      "label": "Cart Button Text",
+      "default": "Cart"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "category": "Navigation",
+      "settings": {
+        "show_login": true,
+        "show_signup": true,
+        "show_cart": true,
+        "login_text": "Login",
+        "signup_text": "Sign Up",
+        "cart_text": "Cart"
+      }
+    }
+  ]
+}
+{% endschema %}

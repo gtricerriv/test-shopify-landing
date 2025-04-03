@@ -1,0 +1,159 @@
+{% style %}
+  .primary-button {
+    background-color: {{ section.settings.primary_button_color }};
+  }
+  .primary-button:hover {
+    background-color: {{ section.settings.primary_button_color | color_darken: 10 }};
+  }
+{% endstyle %}
+
+<div
+  class="{{ section.settings.padding_top }} {{ section.settings.padding_bottom }} w-full"
+  style="background: linear-gradient(to bottom, {{ section.settings.top_background_color }} 0%, {{ section.settings.top_background_color }} 50%, {{ section.settings.main_background_color }} 50%, {{ section.settings.main_background_color }} 100%);"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4" style="color: {{ section.settings.text_color }};">
+        {{ section.settings.title }}
+      </h1>
+      <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto" style="color: {{ section.settings.text_color }};">
+        {{ section.settings.subtitle }}
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="{{ section.settings.secondary_button_link }}"
+          class="bg-white border border-gray-200 font-medium rounded-lg px-6 py-3 transition-all duration-200 hover:bg-gray-50"
+          style="color: {{ section.settings.text_color }};"
+        >
+          {{ section.settings.secondary_button_text }}
+        </a>
+        <a
+          href="{{ section.settings.primary_button_link }}"
+          class="primary-button text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 hover:shadow-lg"
+        >
+          {{ section.settings.primary_button_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "CTA Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Start your free trial"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Join over 4,000+ startups already growing with Untitled."
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "Get started"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "options": [
+        {
+          "value": "pt-0",
+          "label": "None"
+        },
+        {
+          "value": "pt-5",
+          "label": "Small"
+        },
+        {
+          "value": "pt-10",
+          "label": "Medium"
+        },
+        {
+          "value": "pt-20",
+          "label": "Large"
+        }
+      ],
+      "default": "pt-10"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "options": [
+        {
+          "value": "pb-0",
+          "label": "None"
+        },
+        {
+          "value": "pb-5",
+          "label": "Small"
+        },
+        {
+          "value": "pb-10",
+          "label": "Medium"
+        },
+        {
+          "value": "pb-20",
+          "label": "Large"
+        }
+      ],
+      "default": "pb-10"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_color",
+      "label": "Primary Button Color",
+      "default": "#2970FF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1D2939"
+    },
+    {
+      "type": "color",
+      "id": "top_background_color",
+      "label": "Top Background Color",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "color",
+      "id": "main_background_color",
+      "label": "Main Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Section",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}
