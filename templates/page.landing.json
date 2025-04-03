@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "hero_section_b3Lmk3": {
+      "type": "hero-section",
+      "settings": {
+        "padding_top": 160,
+        "padding_bottom": 130,
+        "background_image": "shopify://shop_images/Hero_header_section.png",
+        "image_position": "center",
+        "enable_blur_effect": true,
+        "show_header": true,
+        "tagline": "Super. Simple. Banking.",
+        "title": "Simple banking that works like magic.",
+        "subtitle": "Simple, transparent banking. No hidden fees and free overdrafts.",
+        "primary_cta_text": "Sign up",
+        "primary_cta_url": "shopify://pages/landing",
+        "secondary_cta_text": "Demo",
+        "secondary_cta_url": "shopify://pages/landing"
+      }
+    },
+    "business_cards_section_cwMnwN": {
+      "type": "business-cards-section",
+      "blocks": {
+        "feature_44DWP8": {
+          "type": "feature",
+          "settings": {
+            "title": "Unlimited cards",
+            "description": "Give your team the autonomy they need with access to as many cards as they need. Authorise purchases with a click. Simple.",
+            "icon": "card",
+            "link_url": "",
+            "link_text": "Learn more"
+          }
+        },
+        "feature_CDYCAk": {
+          "type": "feature",
+          "settings": {
+            "title": "Easy expense policies",
+            "description": "Every card comes with configurable spending limits, purchase restrictions, and cancellations for each employee and team.",
+            "icon": "currency",
+            "link_url": "",
+            "link_text": "Learn more"
+          }
+        },
+        "feature_7PnhAQ": {
+          "type": "feature",
+          "settings": {
+            "title": "Advanced analytics",
+            "description": "An all-in-one platform that helps you balance everything your team need to be happy and your finances in order.",
+            "icon": "analytics",
+            "link_url": "",
+            "link_text": "Learn more"
+          }
+        }
+      },
+      "block_order": [
+        "feature_44DWP8",
+        "feature_CDYCAk",
+        "feature_7PnhAQ"
+      ],
+      "settings": {
+        "padding_top": 20,
+        "padding_bottom": 0,
+        "section_label": "Features",
+        "main_title": "The only card you'll ever need. Simple.",
+        "description": "Give your team the financial tools they need to succeed. Simple expense management for modern businesses.",
+        "cards_image": "shopify://shop_images/Content_1.png",
+        "image_position_desktop": "right",
+        "image_position_mobile": "bottom"
+      }
+    },
+    "cta_section_YgKtBF": {
+      "type": "cta-section",
+      "settings": {
+        "title": "Start your free trial",
+        "subtitle": "Join over 4,000+ startups already growing with Untitled.",
+        "primary_button_text": "Get started",
+        "primary_button_link": "shopify://pages/landing",
+        "secondary_button_text": "Learn more",
+        "secondary_button_link": "shopify://pages/landing",
+        "padding_top": "pt-20",
+        "padding_bottom": "pb-20",
+        "primary_button_color": "#2970ff",
+        "text_color": "#1d2939",
+        "top_background_color": "#fafafa",
+        "main_background_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_section_b3Lmk3",
+    "business_cards_section_cwMnwN",
+    "cta_section_YgKtBF"
+  ]
+}
