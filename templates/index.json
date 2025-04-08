@@ -9,76 +9,95 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero_section_cyVyxm": {
+      "type": "hero-section",
+      "settings": {
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "background_image": "shopify://shop_images/Hero_header_section.png",
+        "image_position": "center",
+        "enable_blur_effect": true,
+        "show_header": true,
+        "tagline": "Super. Simple. Banking.",
+        "title": "Simple banking that works like magic.",
+        "subtitle": "Simple, transparent banking. No hidden fees and free overdrafts.",
+        "primary_cta_text": "Sign up",
+        "primary_cta_url": "",
+        "secondary_cta_text": "Demo",
+        "secondary_cta_url": ""
+      }
+    },
+    "business_cards_section_anUhGr": {
+      "type": "business-cards-section",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "feature_W7NPTY": {
+          "type": "feature",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "title": "Unlimited cards",
+            "description": "Give your team the autonomy they need with access to as many cards as they need. Authorise purchases with a click. Simple.",
+            "icon": "card",
+            "link_url": "",
+            "link_text": "Learn more"
           }
         },
-        "button": {
-          "type": "buttons",
+        "feature_EQgceW": {
+          "type": "feature",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "title": "Easy expense policies",
+            "description": "Every card comes with configurable spending limits, purchase restrictions, and cancellations for each employee and team.",
+            "icon": "currency",
+            "link_url": "",
+            "link_text": "Learn more"
+          }
+        },
+        "feature_jBC9e3": {
+          "type": "feature",
+          "settings": {
+            "title": "Advanced analytics",
+            "description": "An all-in-one platform that helps you balance everything your team need to be happy and your finances in order.",
+            "icon": "analytics",
+            "link_url": "",
+            "link_text": "Learn more"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "feature_W7NPTY",
+        "feature_EQgceW",
+        "feature_jBC9e3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section_label": "Features",
+        "main_title": "The only card you'll ever need. Simple.",
+        "description": "Give your team the financial tools they need to succeed. Simple expense management for modern businesses.",
+        "cards_image": "shopify://shop_images/Content_1.png",
+        "image_position_desktop": "right",
+        "image_position_mobile": "top"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "cta_section_akQr4V": {
+      "type": "cta-section",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "title": "Start your free trial",
+        "subtitle": "Join over 4,000+ startups already growing with Untitled.",
+        "primary_button_text": "Get started",
+        "primary_button_link": "",
+        "secondary_button_text": "Learn more",
+        "secondary_button_link": "",
+        "padding_top": "pt-10",
+        "padding_bottom": "pb-10",
+        "primary_button_color": "#2970FF",
+        "text_color": "#1D2939",
+        "top_background_color": "#FAFAFA",
+        "main_background_color": "#FFFFFF"
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero_section_cyVyxm",
+    "business_cards_section_anUhGr",
+    "cta_section_akQr4V"
   ]
 }
